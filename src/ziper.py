@@ -1,7 +1,7 @@
 import zipfile
 
 
-def zipdic(path):
+def zipdir(path):
     pass
 
 if __name__ == '__main__':

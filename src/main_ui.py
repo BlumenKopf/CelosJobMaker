@@ -17,10 +17,10 @@ class PageOne(QWidget):
         self.show()
     
     def initUI(self):
-        # Define the Main Window
+        # Define the First Window
         self.setFocus()
         self.setGeometry(500,500,1000,500)
-        self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join('icon','Celos.bmp'))))
+        self.setWindowIcon(QtGui.QIcon(QtGui.QPixmap(os.path.join('icons','Celos.bmp'))))
         self.setWindowTitle('Job Information')
         self.setFont(QtGui.QFont('Arial', 10))
 
@@ -56,15 +56,32 @@ class PageOne(QWidget):
             'Siemens',
             'Mapps'
         ])
-        self.combobox.move(10, 100)
-       
-        
+        self.combobox.move(10, 100)        
 
     def next():
         pass    
     
-    def btn_close(self):
+    def btn_close(self, ):
         self.close()
+    
+    def closeEvent(self, event: QtGui.QCloseEvent) -> None:
+        self.msg = QMessageBox(self)
+        self.msg.setWindowTitle('Close App')
+        self.msg.setText('You are sure to close the App')
+        self.msg.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+        #self.msg.buttonClicked.connect(msgButtonClick)
+        returnvalue = self.msg.exec_()
+
+        if returnvalue == QMessageBox.Yes:
+            if not type(event) == bool:
+                event.accept()
+            else:
+                sys.exit()
+        else:
+            if not type(event) == bool:
+                event.ignore()
+
+
 
 def main():
     app = QApplication(sys.argv)
