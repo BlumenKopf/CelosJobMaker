@@ -47,8 +47,7 @@ class PageOne(QWidget):
         self.date.setDate(now)
 
         self.time = QTimeEdit(self)
-        self.time.move(135,80)
-        
+        self.time.move(135,80)        
 
         self.button1 = QPushButton('Button', self)
         self.button1.move(10, 300)
