@@ -69,7 +69,7 @@ class PageOne(QWidget):
         self.combobox.move(10, 200)        
 
     def next(self):
-        print(self.date.date().toPyDate())  
+        pass
     
     def btn_close(self):
         self.close()
