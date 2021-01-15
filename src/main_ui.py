@@ -25,9 +25,9 @@ class PageOne(QTabWidget):
         self.setWindowTitle('Job Information')
         self.setFont(QtGui.QFont('Arial', 10))
 
-        self.tab1 = QWidget(self)
-        self.tab2 = QWidget(self)
-
+        self.tab1 = QTabWidget(self)#.tabBar().setTabButton(0, QTabBar.RightSide, None)
+        self.tab2 = QTabWidget(self)
+        
         # Tab 1 
         self.addTab(self.tab1, 'Tab 1')
 
@@ -100,7 +100,8 @@ class PageOne(QTabWidget):
         self.combobox.move(10, 400) 
 
         #Tab 2
-        self.addTab(self.tab2, 'Tab 2')   
+        self.addTab(self.tab2, 'Tab 2') 
+          
 
 
 
