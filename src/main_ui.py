@@ -99,14 +99,30 @@ class PageOne(QTabWidget):
         ])
         self.combobox.move(10, 400) 
 
-        #Tab 2
+        #Tab 2        
         self.addTab(self.tab2, 'Tab 2') 
-          
+
+        self.btn1_t2 = QPushButton('Button', self.tab2)
+        self.btn1_t2.move(10, 300)
+        self.btn1_t2.setText('Back')
+        self.btn1_t2.clicked.connect(self.back)
+
+        self.btn2_t2 = QPushButton('Button', self.tab2)
+        self.btn2_t2.move(100, 300)
+        self.btn2_t2.setText('Next')
+        self.btn2_t2.clicked.connect(self.next)
 
 
 
     def next(self):
-        self.setCurrentWidget(self.tab2)
+        index = self.currentIndex()
+        index += 1
+        self.setCurrentIndex(index)
+
+    def back(self):
+        index = self.currentIndex()
+        index -= 1
+        self.setCurrentIndex(index)
 
     def btn_close(self):
         self.close()
