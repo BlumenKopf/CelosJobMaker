@@ -11,6 +11,34 @@ if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
 if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
 
+class ListBoxWidget(QListWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setFixedSize(500, 300)
+        self.setAcceptDrops(True)
+    
+    def dragEnterEvent(self, e: QtGui.QDragEnterEvent) -> None:
+        if e.mimeData().hasUrls:
+            e.accept()
+        else:
+            e.ignore()
+
+    def dragMoveEvent(self, e: QtGui.QDragMoveEvent) -> None:
+        if e.mimeData().hasUrls():
+            e.setDropAction(QtCore.Qt.CopyAction)
+            e.accept()
+        else:
+            e.ignore()
+    
+    def dropEvent(self, event: QtGui.QDropEvent) -> None:
+        if event.mimeData().hasUrls():
+            event.setDropAction(QtCore.Qt.CopyAction)
+            event.accept()
+
+            links = []
+            print(event.mimeData().urls())
+            
+
 class PageOne(QTabWidget):    
     def __init__(self):
         super().__init__()
@@ -99,7 +127,8 @@ class PageOne(QTabWidget):
         ])
         self.combobox.move(10, 400) 
 
-        #Tab 2        
+        #Tab 2  
+             
         self.addTab(self.tab2, 'Tab 2') 
 
         self.btn1_t2 = QPushButton('Button', self.tab2)
@@ -108,9 +137,12 @@ class PageOne(QTabWidget):
         self.btn1_t2.clicked.connect(self.back)
 
         self.btn2_t2 = QPushButton('Button', self.tab2)
-        self.btn2_t2.move(100, 300)
+        self.btn2_t2.move(1000, 300)
         self.btn2_t2.setText('Next')
         self.btn2_t2.clicked.connect(self.next)
+
+        self.lstv = ListBoxWidget(self.tab2)
+
 
 
 
