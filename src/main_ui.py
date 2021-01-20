@@ -36,6 +36,9 @@ class ListBoxWidget(QListWidget):
             event.accept()
 
             links = []
+            if url in event.mimeData().urls():
+                links.append()
+
             print(event.mimeData().urls())
             
 
