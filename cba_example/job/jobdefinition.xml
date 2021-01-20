@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job major="2" minor="0" isFinished="true" generator="JOB MANAGER 4.0.0.r65759">
+    <jobDescription>
+        <controllerType>1040</controllerType>
+        <jobUUID>{f75097b6-d97d-4615-be32-83f675d3fa17}</jobUUID>
+        <jobName>job</jobName>
+        <clientName>kundenname</clientName>
+        <priority>B</priority>
+        <material>werkstoff</material>
+        <customEdit0>1</customEdit0>
+        <customEdit1>jobid</customEdit1>
+        <customEdit2>kundenid</customEdit2>
+        <customEdit3>2</customEdit3>
+        <startDate>2021-01-04</startDate>
+        <targetDate>2021-01-04</targetDate>
+        <desiredQuantity>9</desiredQuantity>
+        <availableQuantity>99</availableQuantity>
+        <inProduction>false</inProduction>
+        <duration>0</duration>
+        <executionStart>2021-01-04T10:34:00</executionStart>
+        <workingTimes/>
+        <nextPlannedStartTime></nextPlannedStartTime>
+        <isArchived>false</isArchived>
+    </jobDescription>
+    <partList>
+        <part>
+            <partUUID>{ad9b4d6c-ee5a-40ef-9736-136cadf0b1e1}</partUUID>
+            <partDescriptionFilename></partDescriptionFilename>
+            <partDescription/>
+            <setupList>
+                <setup>
+                    <setupInformation>
+                        <setupID>aufspid</setupID>
+                        <setupUUID>{0917f052-c880-4c93-80f8-face4f0579b1}</setupUUID>
+                        <setupName>aufspname</setupName>
+                        <finishedQuantity>0</finishedQuantity>
+                        <failedQuantity>0</failedQuantity>
+                        <targetProcessingTime>0</targetProcessingTime>
+                        <targetSettingUpTime>0</targetSettingUpTime>
+                        <setupDescriptionFilename></setupDescriptionFilename>
+                        <additionalInformationFilename></additionalInformationFilename>
+                    </setupInformation>
+                    <setupDescription/>
+                    <utilities/>
+                    <tools setup_ok="false">
+                        <necessaryTools>
+                            <necessaryTool uuid="{99a4cee0-1a26-4c2d-9e77-fbc04d3ce34f}" groupId="tool1" available="false" ignore="false" channel="1,0,0,0,0,0,0,0"/>
+                        </necessaryTools>
+                    </tools>
+                    <clampingDevices setup_ok="false">
+                        <offsets/>
+                        <files/>
+                    </clampingDevices>
+                    <NCData setup_ok="false">
+                        <item load_to_nc="false" channel="0,0,0,0,0,0,0,0" isSelected="false" filename="1001_ROGHING_TURN.MPF" is_modified="false" use_modified="false"/>
+                        <item load_to_nc="false" channel="0,0,0,0,0,0,0,0" isSelected="false" filename="1002_FINISHING_TURN.MPF" is_modified="false" use_modified="false"/>
+                    </NCData>
+                    <additionalInfo/>
+                </setup>
+            </setupList>
+        </part>
+    </partList>
+</job>
