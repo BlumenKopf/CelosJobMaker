@@ -18,7 +18,7 @@ class ListBoxWidget(QListWidget):
         self.setAcceptDrops(True)
     
     def dragEnterEvent(self, e: QtGui.QDragEnterEvent) -> None:
-        if e.mimeData().hasUrls:
+        if e.mimeData().hasUrls():
             e.accept()
         else:
             e.ignore()
@@ -35,12 +35,16 @@ class ListBoxWidget(QListWidget):
             event.setDropAction(QtCore.Qt.CopyAction)
             event.accept()
 
-            links = []
-            for url in event.mimeData().urls():
-                links.append()
+            show = []
+            move = []
 
-            print(event.mimeData().urls())
-            
+            for url in event.mimeData().urls():
+                if url.isLocalFile():
+                    show.append(str(os.path.basename(url.toLocalFile())))
+                    move.append(str(url.toLocalFile()))
+                #else:
+                #   links.append(str(url.toString()))
+            self.addItems(show)
 
 class PageOne(QTabWidget):    
     def __init__(self):
@@ -120,19 +124,18 @@ class PageOne(QTabWidget):
         self.button2 = QPushButton('Button', self.tab1)
         self.button2.move(100, 300)
         self.button2.setText('Cancel')
-        self.button2.clicked.connect(self.btn_close) 
+        self.button2.clicked.connect(self.btn_close)         
 
-        self.combobox = QComboBox(self.tab1)
+        #Tab 2             
+        self.addTab(self.tab2, 'Tab 2') 
+
+        self.combobox = QComboBox(self.tab2)
         self.combobox.addItems([
             'Heidenhain',
             'Siemens',
             'Mapps'
         ])
-        self.combobox.move(10, 400) 
-
-        #Tab 2  
-             
-        self.addTab(self.tab2, 'Tab 2') 
+        self.combobox.move(800, 10) 
 
         self.btn1_t2 = QPushButton('Button', self.tab2)
         self.btn1_t2.move(10, 300)
@@ -145,9 +148,6 @@ class PageOne(QTabWidget):
         self.btn2_t2.clicked.connect(self.next)
 
         self.lstv = ListBoxWidget(self.tab2)
-
-
-
 
     def next(self):
         index = self.currentIndex()
@@ -177,8 +177,6 @@ class PageOne(QTabWidget):
         else:
             if not type(event) == bool:
                 event.ignore()
-
-
 
 def main():
     app = QApplication(sys.argv)
