@@ -10,12 +10,30 @@ if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
 
 if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+    
+class ControlCombobox(QComboBox):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.addItems([
+            'Heidenhain',
+            'Siemens',
+            'Mapps'
+        ])
+        self.move(800, 10)
+        self.setCurrentIndex(0)
+        self.currentTextChanged.connect(self.on_combobox_change)
+        ttt = self.currentText()
+        print(ttt)
+
+    def on_combobox_change(self, value):
+        print('change', value)
 
 class ListBoxWidget(QListWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFixedSize(500, 300)
         self.setAcceptDrops(True)
+        
     
     def dragEnterEvent(self, e: QtGui.QDragEnterEvent) -> None:
         if e.mimeData().hasUrls():
@@ -37,7 +55,7 @@ class ListBoxWidget(QListWidget):
 
             show = []
             move = []
-
+            self.ttt = 3
             for url in event.mimeData().urls():
                 if url.isLocalFile():
                     show.append(str(os.path.basename(url.toLocalFile())))
@@ -127,15 +145,7 @@ class PageOne(QTabWidget):
         self.button2.clicked.connect(self.btn_close)         
 
         #Tab 2             
-        self.addTab(self.tab2, 'Tab 2') 
-
-        self.combobox = QComboBox(self.tab2)
-        self.combobox.addItems([
-            'Heidenhain',
-            'Siemens',
-            'Mapps'
-        ])
-        self.combobox.move(800, 10) 
+        self.addTab(self.tab2, 'Tab 2')
 
         self.btn1_t2 = QPushButton('Button', self.tab2)
         self.btn1_t2.move(10, 300)
@@ -148,6 +158,7 @@ class PageOne(QTabWidget):
         self.btn2_t2.clicked.connect(self.next)
 
         self.lstv = ListBoxWidget(self.tab2)
+        self.conbox = ControlCombobox(self.tab2)
 
     def next(self):
         index = self.currentIndex()
