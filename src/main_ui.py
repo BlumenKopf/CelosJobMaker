@@ -10,7 +10,19 @@ if hasattr(QtCore.Qt, 'AA_EnableHighDpiScaling'):
 
 if hasattr(QtCore.Qt, 'AA_UseHighDpiPixmaps'):
     PyQt5.QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
-    
+
+class secondTab(QWidget):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        
+        self.comb = QComboBox()
+        self.comb.move(800, 10)
+        self.comb.addItems([
+            'Heidenhain',
+            'Siemens',
+            'Mapps'
+        ])
+        
 class ControlCombobox(QComboBox):
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -22,19 +34,36 @@ class ControlCombobox(QComboBox):
         self.move(800, 10)
         self.setCurrentIndex(0)
         self.currentTextChanged.connect(self.on_combobox_change)
-        ttt = self.currentText()
-        print(ttt)
-
+        global control 
+        control = ''
+        if self.currentText() == 'Heidenhain':
+            control = '.h'
+        elif self.currentText() == 'Siemens':
+            control = '.mpf'
+        elif self.currentText() == 'Mapps':
+            control = '.nc'
+        
+        
     def on_combobox_change(self, value):
-        print('change', value)
+        global control
+        if self.currentText() == 'Heidenhain':
+            control = '.h'
+        elif self.currentText() == 'Siemens':
+            control = '.mpf'
+        elif self.currentText() == 'Mapps':
+            control = '.nc'
+        
+                
 
 class ListBoxWidget(QListWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.setFixedSize(500, 300)
         self.setAcceptDrops(True)
-        
     
+    def cleanup(self):
+        self.deleteLater()
+                
     def dragEnterEvent(self, e: QtGui.QDragEnterEvent) -> None:
         if e.mimeData().hasUrls():
             e.accept()
@@ -55,14 +84,24 @@ class ListBoxWidget(QListWidget):
 
             show = []
             move = []
-            self.ttt = 3
             for url in event.mimeData().urls():
                 if url.isLocalFile():
-                    show.append(str(os.path.basename(url.toLocalFile())))
-                    move.append(str(url.toLocalFile()))
+                    if os.path.splitext(url.toLocalFile())[1] == control:
+                        show.append(str(os.path.basename(url.toLocalFile())))
+                        move.append(str(url.toLocalFile()))
+                    elif os.path.splitext(url.toLocalFile())[1] == control:
+                        show.append(str(os.path.basename(url.toLocalFile())))
+                        move.append(str(url.toLocalFile()))
+                    elif os.path.splitext(url.toLocalFile())[1] == control:
+                        show.append(str(os.path.basename(url.toLocalFile())))
+                        move.append(str(url.toLocalFile()))
+                    else:
+                        print('wrong type')
+                    #rint(os.path.splitext(url.toLocalFile())[1])
                 #else:
                 #   links.append(str(url.toString()))
             self.addItems(show)
+            #print(control)
 
 class PageOne(QTabWidget):    
     def __init__(self):
@@ -158,7 +197,8 @@ class PageOne(QTabWidget):
         self.btn2_t2.clicked.connect(self.next)
 
         self.lstv = ListBoxWidget(self.tab2)
-        self.conbox = ControlCombobox(self.tab2)
+        #self.conbox = ControlCombobox(self.tab2)
+        self.cmb =secondTab(self.tab2)
 
     def next(self):
         index = self.currentIndex()
